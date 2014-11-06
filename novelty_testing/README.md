@@ -33,12 +33,12 @@ kevoreejs -n jsNode -k models/base.kevs
 
 `javaNode` **java** runtime  
 ```sh
-java -Dnode.name=javaNode -Dnode.bootstrap=models/base.kevs -jar kevoree-5.1.3.jar
+java -Dnode.name=javaNode -Dnode.bootstrap=models/base.kevs -Dversion=5.1.4-SNAPSHOT -jar kevoree-5.1.3.jar
 ```
 
 `node0` **java** runtime  
 ```sh
-java -Dnode.bootstrap=models/base.kevs -jar kevoree-5.1.3.jar
+java -Dnode.bootstrap=models/base.kevs -Dversion=5.1.4-SNAPSHOT -jar kevoree-5.1.3.jar
 ```
 
 #### Deploy a first model with the tester stopped
