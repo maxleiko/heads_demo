@@ -1,0 +1,14 @@
+add node0, node1 : JavaNode
+add node1.printer : ConsolePrinter
+add node0.ticker : Ticker
+add sync : WSGroup
+add chan : RemoteWSChan/5.1.4-SNAPSHOT
+
+set chan.host = "localhost"
+set chan.port = "9050"
+set sync.master = "node0"
+
+bind node0.ticker.tick chan
+bind node1.printer.input chan
+
+attach node0, node1 sync

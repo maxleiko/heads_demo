@@ -1,0 +1,75 @@
+// tester platform
+add node0 : JavaNode/5.1.4-SNAPSHOT
+add node0.cmd : ToyConsole
+
+// target service platforms
+add javaNode : JavaNode/5.1.4-SNAPSHOT
+add jsNode : JavascriptNode/4.0.0-SNAPSHOT
+
+// Novelty Tester Kevoree Component
+add node0.tester : fr.inria.diverse.noveltytesting.FuncTester/0.0.2-SNAPSHOT
+stop node0.tester
+
+// Components under test
+add javaNode.func, jsNode.func : fr.inria.diverse.noveltytesting.samples.FunctionsImpl/0.0.2-SNAPSHOT
+
+// sync group
+add sync : WSGroup
+attach node0, javaNode, jsNode sync
+set sync.master = "node0"
+
+// WsMsgBroker
+add jsNode.broker : WSMsgBroker
+set jsNode.broker.port = "9050"
+
+// service channels
+add javaSumChan,
+    javaEchoChan,
+    javaInverseChan,
+    javaConcatChan,
+    jsSumChan,
+    jsEchoChan,
+    jsInverseChan,
+    jsConcatChan: RemoteWSChan/5.1.4-SNAPSHOT
+
+// channels host settings
+set javaSumChan.host     = 'localhost'
+set javaEchoChan.host    = 'localhost'
+set javaInverseChan.host = 'localhost'
+set javaConcatChan.host  = 'localhost'
+set jsSumChan.host       = 'localhost'
+set jsEchoChan.host      = 'localhost'
+set jsInverseChan.host   = 'localhost'
+set jsConcatChan.host    = 'localhost'
+// channels port settings
+set javaSumChan.port     = '9050'
+set javaEchoChan.port    = '9050'
+set javaInverseChan.port = '9050'
+set javaConcatChan.port  = '9050'
+set jsSumChan.port       = '9050'
+set jsEchoChan.port      = '9050'
+set jsInverseChan.port   = '9050'
+set jsConcatChan.port    = '9050'
+
+// output bindings
+bind node0.tester.sum javaSumChan
+bind node0.tester.sum jsSumChan
+bind node0.tester.echo javaEchoChan
+bind node0.tester.echo jsEchoChan
+bind node0.tester.inverse javaInverseChan
+bind node0.tester.inverse jsInverseChan
+bind node0.tester.concat javaConcatChan
+bind node0.tester.concat jsConcatChan
+
+// input bindings
+bind javaNode.func.sum javaSumChan
+bind jsNode.func.sum jsSumChan
+bind javaNode.func.echo javaEchoChan
+bind jsNode.func.echo jsEchoChan
+bind javaNode.func.inverse javaInverseChan
+bind jsNode.func.inverse jsInverseChan
+bind javaNode.func.concat javaConcatChan
+bind jsNode.func.concat jsConcatChan
+
+// network
+network node0.ip.ip 127.0.0.1

@@ -1,0 +1,5 @@
+add node0 : JavaNode
+
+add sync_3 : MQTTGroup
+attach node0 sync_3
+set sync_3.broker = "tcp://mqtt.kevoree.org:81"

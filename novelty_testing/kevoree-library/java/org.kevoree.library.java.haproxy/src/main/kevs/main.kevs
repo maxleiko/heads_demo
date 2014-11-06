@@ -1,0 +1,17 @@
+include mvn:org.kevoree.library.java:org.kevoree.library.java.javaNode:latest
+include mvn:org.kevoree.library.java:org.kevoree.library.java.haproxy:latest
+include mvn:org.kevoree.library.java:org.kevoree.library.java.web:latest
+include mvn:org.kevoree.library.java:org.kevoree.library.java.ws:latest
+
+add node0 : JavaNode
+add sync : WSGroup
+attach node0 sync
+
+add node0.lb : HAProxy
+add node0.srv0 : NanoBlogServer
+add node0.srv1 : NanoBlogServer
+set node0.srv0.http_port = "8081"
+set node0.srv1.http_port = "8082"
+
+add node0.scaler : DummyScaler/5.1.2-SNAPSHOT
+

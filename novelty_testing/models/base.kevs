@@ -1,0 +1,9 @@
+add jsNode : JavascriptNode/4.0.0-SNAPSHOT
+add javaNode, node0 : JavaNode/5.1.4-SNAPSHOT
+add sync : WSGroup/5.1.3
+
+attach jsNode, javaNode, node0 sync
+
+set sync.master = 'node0'
+
+network node0.ip.ip 127.0.0.1
