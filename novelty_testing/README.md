@@ -25,6 +25,14 @@ mvn install
 cd ../../..
 ```
 
+Compile Novelty search component
+```
+cd kevoree-java-novelty-tester
+mvn clean install
+cd ..
+```
+
+
 #### Start the 3 Kevoree runtimes
 `jsNode` **js** runtime
 ```sh
